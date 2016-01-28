@@ -1,0 +1,29 @@
+{
+  "name": "zkflow-task-karma",
+  "version": "0.0.0",
+  "description": "Karma task in zkflow format",
+  "main": "src/karmaTask.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zaklinaczekodu/zkflow-task-karma.git"
+  },
+  "keywords": [
+    "gulp",
+    "zkflow",
+    "tasks",
+    "karma"
+  ],
+  "author": "Piotr Baranowski <piotr.baranowski@zaklinaczekodu.com> (https://github.com/zaklinaczekodu)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaklinaczekodu/zkflow-task-karma/issues"
+  },
+  "homepage": "https://github.com/zaklinaczekodu/zkflow-task-karma",
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-zkflow-nodemodule": "0.1.1"
+  },
+  "peerDependencies": {
+    "gulp": "3.*"
+  }
+}
