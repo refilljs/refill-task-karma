@@ -10,7 +10,7 @@
   "keywords": [
     "gulp",
     "zkflow",
-    "tasks",
+    "task",
     "karma"
   ],
   "author": "Piotr Baranowski <piotr.baranowski@zaklinaczekodu.com> (https://github.com/zaklinaczekodu)",
@@ -25,5 +25,19 @@
   },
   "peerDependencies": {
     "gulp": "3.*"
+  },
+  "dependencies": {
+    "browserify": "13.0.0",
+    "browserify-istanbul": "0.2.1",
+    "gulp-watch": "4.3.5",
+    "gulp-zkflow-utils": "0.4.1",
+    "karma": "0.13.19",
+    "karma-browserify": "5.0.1",
+    "karma-chrome-launcher": "0.2.2",
+    "karma-coverage": "0.5.3",
+    "karma-jasmine": "0.3.6",
+    "karma-junit-reporter": "0.3.8",
+    "q": "1.4.1",
+    "watchify": "3.7.0"
   }
 }
