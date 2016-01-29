@@ -31,6 +31,7 @@
     "browserify-istanbul": "0.2.1",
     "gulp-watch": "4.3.5",
     "gulp-zkflow-utils": "0.4.1",
+    "jasmine-core": "2.4.1",
     "karma": "0.13.19",
     "karma-browserify": "5.0.1",
     "karma-chrome-launcher": "0.2.2",
