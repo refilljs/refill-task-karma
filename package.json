@@ -1,6 +1,6 @@
 {
   "name": "zkflow-task-karma",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Karma task in zkflow format",
   "main": "src/karmaTask.js",
   "repository": {
