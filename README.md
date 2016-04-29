@@ -4,19 +4,22 @@ Karma task in [ZKflow](https://github.com/zaklinaczekodu/zkflow) format
 
 [<img alt="Made by Zaklinacze Kodu" src="http://zaklinaczekodu.com/_assets/madeBy.svg" width="200">](http://zaklinaczekodu.com)
 
+[Facebook](https://www.facebook.com/zaklinaczekodu)
+
 Shields
 -------
 
 [![npm](https://img.shields.io/npm/v/zkflow-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-karma)
 [![npm](https://img.shields.io/npm/l/zkflow-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-karma)
-[![npm](https://img.shields.io/npm/dm/zkflow-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-karma)<br>
-[![Travis](https://img.shields.io/travis/zaklinaczekodu/zkflow-task-karma/master.svg?style=flat-square)](https://travis-ci.org/zaklinaczekodu/zkflow-task-karma)
-[![Code Climate](https://img.shields.io/codeclimate/github/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://codeclimate.com/github/zaklinaczekodu/zkflow-task-karma)<br>
-[![David](https://img.shields.io/david/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://david-dm.org/zaklinaczekodu/zkflow-task-karma)
-[![David](https://img.shields.io/david/dev/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://david-dm.org/zaklinaczekodu/zkflow-task-karma)<br>
+[![npm](https://img.shields.io/npm/dm/zkflow-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-karma)
+[![Travis](https://img.shields.io/travis/zaklinaczekodu/zkflow-task-karma/master.svg?style=flat-square)](https://travis-ci.org/zaklinaczekodu/zkflow-task-karma)<br>
+[![bitHound Overall Score](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/badges/score.svg)](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma)
+[![bitHound Dependencies](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/badges/dependencies.svg)](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/badges/devDependencies.svg)](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/badges/code.svg)](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma)<br>
 [![GitHub forks](https://img.shields.io/github/forks/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-karma)
 [![GitHub stars](https://img.shields.io/github/stars/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-karma)
-[![GitHub followers](https://img.shields.io/github/followers/zaklinaczekodu.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-karma)
+[![GitHub watchers](https://img.shields.io/github/watchers/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-karma)
 
 Installation
 ------------
