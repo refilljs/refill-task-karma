@@ -1,8 +1,9 @@
 'use strict';
 
 var zkutils = require('gulp-zkflow-utils');
+var ZkflowNextHandler = require('zkflow-next-handler');
 var karma = require('karma');
-var istanbul = require('browserify-istanbul');
+var browserifyIstanbul = require('browserify-istanbul');
 var watch = require('gulp-watch');
 var q = require('q');
 var karmaBrowserify = require('karma-browserify');
@@ -16,7 +17,7 @@ function getKarmaTask(options, gulp, mode) {
   function karmaTask(next) {
 
     var logger = zkutils.logger('test');
-    var nextHandler;
+    var zkflowNextHandler;
 
     var noTestFilesMessage =
       '\nNo test files found.\n\n' +
@@ -38,7 +39,7 @@ function getKarmaTask(options, gulp, mode) {
 
     if (!mode.watch) {
       reporters = reporters.concat(['junit', 'coverage']);
-      transform = transform.concat([istanbul({
+      transform = transform.concat([browserifyIstanbul({
         ignore: options.istanbulIgnore
       })]);
       plugins.push(karmaJunitReporter);
@@ -84,7 +85,7 @@ function getKarmaTask(options, gulp, mode) {
         var oldKarmaDeferred = karmaDeferred;
 
         karmaDeferred = q.defer();
-        nextHandler.handle(karmaDeferred.promise);
+        zkflowNextHandler.handle(karmaDeferred.promise);
 
         if (results.exitCode === 0) {
           oldKarmaDeferred.resolve();
@@ -97,27 +98,29 @@ function getKarmaTask(options, gulp, mode) {
 
       server.start();
 
-      return nextHandler.handle(karmaDeferred.promise);
+      return zkflowNextHandler.handle(karmaDeferred.promise);
 
     }
 
-    nextHandler = new zkutils.NextHandler({
+    zkflowNextHandler = new ZkflowNextHandler({
       next: next,
       watch: mode.watch,
-      logger: logger
+      logger: logger,
+      quickFinish: true
     });
 
-    nextHandler.handle(
+    zkflowNextHandler.handle(
         zkutils.del(options.reportsBaseDir + '**')
         .then(zkutils.globby.bind(undefined, options.files, noTestFilesMessage)), {
           ignoreFailures: true,
           handleSuccess: false
         })
       .then(runKarma, function() {
+        var watchStream;
         if (!mode.watch) {
           return;
         }
-        var watchStream = watch(options.files, function(event) {
+        watchStream = watch(options.files, function(event) {
           watchStream.close();
           logger.changed(event);
           runKarma();
