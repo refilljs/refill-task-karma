@@ -1,6 +1,6 @@
 {
   "name": "refill-task-karma",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Karma task in Refill format",
   "main": "src/karmaTask.js",
   "repository": {
