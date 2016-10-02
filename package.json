@@ -1,24 +1,24 @@
 {
-  "name": "zkflow-task-karma",
+  "name": "refill-task-karma",
   "version": "2.0.0",
-  "description": "Karma task in zkflow format",
+  "description": "Karma task in Refill format",
   "main": "src/karmaTask.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zaklinaczekodu/zkflow-task-karma.git"
+    "url": "https://github.com/refilljs/refill-task-karma.git"
   },
   "keywords": [
     "gulp",
-    "zkflow",
+    "refill",
     "task",
     "karma"
   ],
   "author": "Piotr Baranowski <piotr.baranowski@zaklinaczekodu.com> (https://github.com/zaklinaczekodu)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zaklinaczekodu/zkflow-task-karma/issues"
+    "url": "https://github.com/refilljs/refill-task-karma/issues"
   },
-  "homepage": "https://github.com/zaklinaczekodu/zkflow-task-karma",
+  "homepage": "https://github.com/refilljs/refill-task-karma",
   "devDependencies": {
     "gulp": "3.9.1",
     "zkflow-node": "1.0.0"
