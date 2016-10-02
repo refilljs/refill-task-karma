@@ -5,7 +5,6 @@ var ZkflowNextHandler = require('zkflow-next-handler');
 var karma = require('karma');
 var browserifyIstanbul = require('browserify-istanbul');
 var watch = require('gulp-watch');
-var q = require('q');
 var karmaBrowserify = require('karma-browserify');
 var karmaJasmine = require('karma-jasmine');
 var karmaChromeLauncher = require('karma-chrome-launcher');
@@ -48,8 +47,19 @@ function getKarmaTask(options, gulp, mode) {
 
     function runKarma() {
 
-      var karmaDeferred = q.defer();
+      var karmaResolve;
+      var karmaReject;
+      var karmaPromise;
       var server;
+
+      function newKarmaPromise() {
+        karmaPromise = new Promise(function (resolve, reject) {
+          karmaResolve = resolve;
+          karmaReject = reject;
+        });
+      }
+
+      newKarmaPromise();
 
       server = new karma.Server({
         files: options.files,
@@ -82,23 +92,24 @@ function getKarmaTask(options, gulp, mode) {
 
       server.on('run_complete', function(browsers, results) {
 
-        var oldKarmaDeferred = karmaDeferred;
+        var oldKarmaResolve = karmaResolve;
+        var oldKarmaReject = karmaReject;
 
-        karmaDeferred = q.defer();
-        zkflowNextHandler.handle(karmaDeferred.promise);
+        newKarmaPromise();
+        zkflowNextHandler.handle(karmaPromise);
 
         if (results.exitCode === 0) {
-          oldKarmaDeferred.resolve();
+          oldKarmaResolve();
           return;
         }
 
-        oldKarmaDeferred.reject('failed');
+        oldKarmaReject('failed');
 
       });
 
       server.start();
 
-      return zkflowNextHandler.handle(karmaDeferred.promise);
+      return zkflowNextHandler.handle(karmaPromise);
 
     }
 
