@@ -25,7 +25,7 @@
   },
   "peerDependencies": {
     "gulp": "^3",
-    "zkflow": "^1"
+    "refill": "^1"
   },
   "dependencies": {
     "browserify": "13.1.0",
