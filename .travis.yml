@@ -1,10 +1,5 @@
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-5
-      - g++-5
+sudo: required
+dist: trusty
 
 language: node_js
 
@@ -17,12 +12,7 @@ os:
   - linux
   - osx
 
-env:
-  global:
-    - CC=gcc-5 CXX=g++-5
-
 before_install:
-  - npm config set progress false
   - npm install -g npm@latest
 
 script:
@@ -34,5 +24,6 @@ deploy:
   api_key: $NPM_API_KEY
   on:
     node: 6
+    condition: $TRAVIS_OS_NAME == linux
     tags: true
-    repo: zaklinaczekodu/zkflow-task-karma
+    repo: refilljs/refill-task-karma

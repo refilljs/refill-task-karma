@@ -1,32 +1,33 @@
 'use strict';
 
-var zkutils = require('gulp-zkflow-utils');
-var ZkflowNextHandler = require('zkflow-next-handler');
+var RefillNextHandler = require('refill-next-handler');
+var refillGlobby = require('refill-globby');
+var refillLogger = require('refill-logger');
 var karma = require('karma');
 var browserifyIstanbul = require('browserify-istanbul');
 var watch = require('gulp-watch');
-var q = require('q');
 var karmaBrowserify = require('karma-browserify');
 var karmaJasmine = require('karma-jasmine');
 var karmaChromeLauncher = require('karma-chrome-launcher');
 var karmaJunitReporter = require('karma-junit-reporter');
 var karmaCoverage = require('karma-coverage');
+var del = require('del');
 
 function getKarmaTask(options, gulp, mode) {
 
   function karmaTask(next) {
 
-    var logger = zkutils.logger('test');
-    var zkflowNextHandler;
+    var logger = refillLogger('test');
+    var refillNextHandler;
 
     var noTestFilesMessage =
       '\nNo test files found.\n\n' +
       'Your test files are determined by globs\n' +
       options.files.toString() + '\n\n' +
       'You can add some matching files with tests.\n' +
-      'Learn more about ZKFlow testing toolstack:\n' +
-      'http://karma-runner.github.io/0.13/index.html\n' +
-      'http://jasmine.github.io/2.3/introduction.html\n' +
+      'Learn more about Refill testing toolstack:\n' +
+      'http://karma-runner.github.io/1.0/index.html\n' +
+      'http://jasmine.github.io/2.5/introduction.html\n' +
       'http://browserify.org/\n';
 
     var reporters = options.reporters;
@@ -48,8 +49,19 @@ function getKarmaTask(options, gulp, mode) {
 
     function runKarma() {
 
-      var karmaDeferred = q.defer();
+      var karmaResolve;
+      var karmaReject;
+      var karmaPromise;
       var server;
+
+      function newKarmaPromise() {
+        karmaPromise = new Promise(function (resolve, reject) {
+          karmaResolve = resolve;
+          karmaReject = reject;
+        });
+      }
+
+      newKarmaPromise();
 
       server = new karma.Server({
         files: options.files,
@@ -82,36 +94,37 @@ function getKarmaTask(options, gulp, mode) {
 
       server.on('run_complete', function(browsers, results) {
 
-        var oldKarmaDeferred = karmaDeferred;
+        var oldKarmaResolve = karmaResolve;
+        var oldKarmaReject = karmaReject;
 
-        karmaDeferred = q.defer();
-        zkflowNextHandler.handle(karmaDeferred.promise);
+        newKarmaPromise();
+        refillNextHandler.handle(karmaPromise);
 
         if (results.exitCode === 0) {
-          oldKarmaDeferred.resolve();
+          oldKarmaResolve();
           return;
         }
 
-        oldKarmaDeferred.reject('failed');
+        oldKarmaReject('failed');
 
       });
 
       server.start();
 
-      return zkflowNextHandler.handle(karmaDeferred.promise);
+      return refillNextHandler.handle(karmaPromise);
 
     }
 
-    zkflowNextHandler = new ZkflowNextHandler({
+    refillNextHandler = new RefillNextHandler({
       next: next,
       watch: mode.watch,
       logger: logger,
       quickFinish: true
     });
 
-    zkflowNextHandler.handle(
-        zkutils.del(options.reportsBaseDir + '**')
-        .then(zkutils.globby.bind(undefined, options.files, noTestFilesMessage)), {
+    refillNextHandler.handle(
+        del(options.reportsBaseDir + '**')
+        .then(refillGlobby.bind(undefined, options.files, noTestFilesMessage)), {
           ignoreFailures: true,
           handleSuccess: false
         })
@@ -154,7 +167,6 @@ module.exports = {
     htmlReporterOutputDir: 'html/',
     istanbulIgnore: [
       '**/node_modules/**',
-      '**/bower_components/**',
       '*Spec.js',
       '**/*Spec.js'
     ],

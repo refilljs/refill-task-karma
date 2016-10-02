@@ -1,6 +1,6 @@
-# ZKflow task karma
+# Refill task karma
 
-Karma task in [ZKflow](https://github.com/zaklinaczekodu/zkflow) format
+Karma task in [Refill](https://github.com/refilljs/refill) format
 
 [<img alt="Made by Zaklinacze Kodu" src="http://zaklinaczekodu.com/_assets/madeBy.svg" width="200">](http://zaklinaczekodu.com)
 
@@ -9,29 +9,29 @@ Karma task in [ZKflow](https://github.com/zaklinaczekodu/zkflow) format
 Shields
 -------
 
-[![npm](https://img.shields.io/npm/v/zkflow-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-karma)
-[![npm](https://img.shields.io/npm/l/zkflow-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-karma)
-[![npm](https://img.shields.io/npm/dm/zkflow-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-karma)
-[![Travis](https://img.shields.io/travis/zaklinaczekodu/zkflow-task-karma/master.svg?style=flat-square)](https://travis-ci.org/zaklinaczekodu/zkflow-task-karma)<br>
-[![bitHound Overall Score](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/badges/score.svg)](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma)
-[![bitHound Dependencies](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/badges/dependencies.svg)](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/badges/devDependencies.svg)](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma/badges/code.svg)](https://www.bithound.io/github/zaklinaczekodu/zkflow-task-karma)<br>
-[![GitHub forks](https://img.shields.io/github/forks/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-karma)
-[![GitHub stars](https://img.shields.io/github/stars/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-karma)
-[![GitHub watchers](https://img.shields.io/github/watchers/zaklinaczekodu/zkflow-task-karma.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-karma)
+[![npm](https://img.shields.io/npm/v/refill-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/refill-task-karma)
+[![npm](https://img.shields.io/npm/l/refill-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/refill-task-karma)
+[![npm](https://img.shields.io/npm/dm/refill-task-karma.svg?style=flat-square)](https://www.npmjs.com/package/refill-task-karma)
+[![Travis](https://img.shields.io/travis/refilljs/refill-task-karma/master.svg?style=flat-square)](https://travis-ci.org/refilljs/refill-task-karma)<br>
+[![bitHound Overall Score](https://www.bithound.io/github/refilljs/refill-task-karma/badges/score.svg)](https://www.bithound.io/github/refilljs/refill-task-karma)
+[![bitHound Dependencies](https://www.bithound.io/github/refilljs/refill-task-karma/badges/dependencies.svg)](https://www.bithound.io/github/refilljs/refill-task-karma/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/refilljs/refill-task-karma/badges/devDependencies.svg)](https://www.bithound.io/github/refilljs/refill-task-karma/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/github/refilljs/refill-task-karma/badges/code.svg)](https://www.bithound.io/github/refilljs/refill-task-karma)<br>
+[![GitHub forks](https://img.shields.io/github/forks/refilljs/refill-task-karma.svg?style=flat-square)](https://github.com/refilljs/refill-task-karma)
+[![GitHub stars](https://img.shields.io/github/stars/refilljs/refill-task-karma.svg?style=flat-square)](https://github.com/refilljs/refill-task-karma)
+[![GitHub watchers](https://img.shields.io/github/watchers/refilljs/refill-task-karma.svg?style=flat-square)](https://github.com/refilljs/refill-task-karma)
 
 Installation
 ------------
 
 ```bash
-npm install --save zkflow-task-karma zkflow gulp
+npm install --save refill-task-karma refill gulp
 ```
 
 Example
 -------
 
-ZKflow taks karma is used in [ZKflow for Angular](https://github.com/zaklinaczekodu/zkflow-angular)
+Refill taks karma is used in [Refill for Angular](https://github.com/refilljs/refill-angular)
 
 Usage
 -----
@@ -39,9 +39,9 @@ Usage
 gulpfile.js
 
 ```javaScript
-require('zkflow')({
+require('refill')({
   js: {
-    task: require('zkflow-task-karma')
+    task: require('refill-task-karma')
   }
 }, require('gulp'), mode)
 ```
@@ -83,7 +83,6 @@ Default options
   htmlReporterOutputDir: 'html/',
   istanbulIgnore: [
     '**/node_modules/**',
-    '**/bower_components/**',
     '*Spec.js',
     '**/*Spec.js'
   ],
@@ -98,9 +97,12 @@ Default options
 }
 ```
 
+Changelog
+---------
+
+[Changelog at github](https://github.com/refilljs/refill-task-karma/releases)
+
 Sponsors
 --------
-
-[<img alt="Street Team" src="http://zaklinaczekodu.com/_assets/streetteam.svg" width="200">](http://getstreetteam.com)
 
 [<img alt="Zaklinacze Kodu" src="http://zaklinaczekodu.com/_assets/logo.svg" width="200">](http://zaklinaczekodu.com)
