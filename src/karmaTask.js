@@ -154,7 +154,6 @@ module.exports = {
     htmlReporterOutputDir: 'html/',
     istanbulIgnore: [
       '**/node_modules/**',
-      '**/bower_components/**',
       '*Spec.js',
       '**/*Spec.js'
     ],
