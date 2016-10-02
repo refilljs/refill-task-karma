@@ -19,6 +19,10 @@
     "url": "https://github.com/refilljs/refill-task-karma/issues"
   },
   "homepage": "https://github.com/refilljs/refill-task-karma",
+  "engines": {
+    "node": ">=4.2",
+    "npm": ">=3.3.3"
+  },
   "devDependencies": {
     "gulp": "3.9.1",
     "refill-node": "^2.0.0"
