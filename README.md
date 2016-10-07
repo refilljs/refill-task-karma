@@ -81,19 +81,23 @@ Default options
   reportsBaseDir: 'reports/test/',
   junitReporterOutputDir: 'junit/',
   htmlReporterOutputDir: 'html/',
-  istanbulIgnore: [
-    '**/node_modules/**',
-    '*Spec.js',
-    '**/*Spec.js'
-  ],
   istanbulReporters: [{
     type: 'html',
     subdir: 'coverageHtml'
   }, {
     type: 'clover',
     subdir: 'coverageClover'
+  }, {
+    type: 'text-summary'
   }],
-  browserifyTransforms: []
+  browserifyTransforms: [],
+  babelPluginIstanbulOptions: {
+    exclude: [
+      '**/node_modules/**',
+      '*Spec.js',
+      '**/*Spec.js'
+    ]
+  }
 }
 ```
 
