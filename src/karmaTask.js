@@ -4,7 +4,6 @@ var RefillNextHandler = require('refill-next-handler');
 var refillGlobby = require('refill-globby');
 var refillLogger = require('refill-logger');
 var karma = require('karma');
-var browserifyIstanbul = require('browserify-istanbul');
 var watch = require('gulp-watch');
 var karmaBrowserify = require('karma-browserify');
 var karmaJasmine = require('karma-jasmine');
@@ -12,6 +11,9 @@ var karmaChromeLauncher = require('karma-chrome-launcher');
 var karmaJunitReporter = require('karma-junit-reporter');
 var karmaCoverage = require('karma-coverage');
 var del = require('del');
+var babelify = require('babelify');
+var babelPresetEs2015 = require('babel-preset-es2015');
+var babelPluginIstanbul = require('babel-plugin-istanbul');
 
 function getKarmaTask(options, gulp, mode) {
 
@@ -26,26 +28,24 @@ function getKarmaTask(options, gulp, mode) {
       options.files.toString() + '\n\n' +
       'You can add some matching files with tests.\n' +
       'Learn more about Refill testing toolstack:\n' +
-      'http://karma-runner.github.io/1.0/index.html\n' +
-      'http://jasmine.github.io/2.5/introduction.html\n' +
+      'http://karma-runner.github.io/\n' +
+      'http://jasmine.github.io/\n' +
+      'https://babeljs.io/\n' +
       'http://browserify.org/\n';
 
     var reporters = options.reporters;
-    var transform = options.browserifyTransforms;
+    var babelifyOptions = {
+      presets: [babelPresetEs2015],
+      plugins: []
+    };
+    var browserifyTransforms = options.browserifyTransforms.concat([
+      [babelify, babelifyOptions]
+    ]);
     var plugins = options.plugins.concat([
       karmaBrowserify,
       karmaJasmine,
       karmaChromeLauncher
     ]);
-
-    if (!mode.watch) {
-      reporters = reporters.concat(['junit', 'coverage']);
-      transform = transform.concat([browserifyIstanbul({
-        ignore: options.istanbulIgnore
-      })]);
-      plugins.push(karmaJunitReporter);
-      plugins.push(karmaCoverage);
-    }
 
     function runKarma() {
 
@@ -74,10 +74,10 @@ function getKarmaTask(options, gulp, mode) {
         preprocessors: options.preprocessors,
         browserify: {
           debug: true,
-          configure: function(bundle) {
+          configure: function (bundle) {
             bundle.on('update', logger.changed);
           },
-          transform: transform
+          transform: browserifyTransforms
         },
         browsers: options.browsers,
         reporters: reporters,
@@ -88,11 +88,11 @@ function getKarmaTask(options, gulp, mode) {
           dir: options.reportsBaseDir,
           reporters: options.istanbulReporters
         }
-      }, function() {
+      }, function () {
         // without this empty function karma will stop execution of entire script after tests
       });
 
-      server.on('run_complete', function(browsers, results) {
+      server.on('run_complete', function (browsers, results) {
 
         var oldKarmaResolve = karmaResolve;
         var oldKarmaReject = karmaReject;
@@ -115,6 +115,20 @@ function getKarmaTask(options, gulp, mode) {
 
     }
 
+    function delReports() {
+      if (mode.watch) {
+        return Promise.resolve();
+      }
+      return del(options.reportsBaseDir + '**');
+    }
+
+    if (!mode.watch) {
+      reporters = reporters.concat(['junit', 'coverage']);
+      plugins.push(karmaJunitReporter);
+      plugins.push(karmaCoverage);
+      babelifyOptions.plugins = babelifyOptions.plugins.concat([[babelPluginIstanbul.default, options.babelPluginIstanbulOptions]]);
+    }
+
     refillNextHandler = new RefillNextHandler({
       next: next,
       watch: mode.watch,
@@ -122,18 +136,16 @@ function getKarmaTask(options, gulp, mode) {
       quickFinish: true
     });
 
-    refillNextHandler.handle(
-        del(options.reportsBaseDir + '**')
-        .then(refillGlobby.bind(undefined, options.files, noTestFilesMessage)), {
-          ignoreFailures: true,
-          handleSuccess: false
-        })
-      .then(runKarma, function() {
+    refillNextHandler.handle(delReports().then(refillGlobby.bind(undefined, options.files, noTestFilesMessage)), {
+      ignoreFailures: true,
+      handleSuccess: false
+    })
+      .then(runKarma, function () {
         var watchStream;
         if (!mode.watch) {
           return;
         }
-        watchStream = watch(options.files, function(event) {
+        watchStream = watch(options.files, function (event) {
           watchStream.close();
           logger.changed(event);
           runKarma();
@@ -165,18 +177,22 @@ module.exports = {
     reportsBaseDir: 'reports/test/',
     junitReporterOutputDir: 'junit/',
     htmlReporterOutputDir: 'html/',
-    istanbulIgnore: [
-      '**/node_modules/**',
-      '*Spec.js',
-      '**/*Spec.js'
-    ],
     istanbulReporters: [{
       type: 'html',
       subdir: 'coverageHtml'
     }, {
       type: 'clover',
       subdir: 'coverageClover'
+    }, {
+      type: 'text-summary'
     }],
-    browserifyTransforms: []
+    browserifyTransforms: [],
+    babelPluginIstanbulOptions: {
+      exclude: [
+        '**/node_modules/**',
+        '*Spec.js',
+        '**/*Spec.js'
+      ]
+    }
   }
 };
